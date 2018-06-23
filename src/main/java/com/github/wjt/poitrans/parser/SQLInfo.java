@@ -1,11 +1,16 @@
 package com.github.wjt.poitrans.parser;
 
 // info about the sql
-public class SQLInfo {
+
+public abstract class SQLInfo {
 
     private String sheetName;
 
     public String getSheetName() {
-        return sheetName;
+        return sheetName == null ? "Sheet1" : sheetName;
+    }
+
+    public void setSheetName(String sheetName) {
+        this.sheetName = sheetName;
     }
 }

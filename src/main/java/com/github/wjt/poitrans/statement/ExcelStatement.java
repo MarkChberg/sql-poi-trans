@@ -3,8 +3,10 @@ package com.github.wjt.poitrans.statement;
 import com.github.wjt.poitrans.SQLHolder;
 import com.github.wjt.poitrans.connection.Connection;
 import com.github.wjt.poitrans.connection.ExcelConnection;
+import com.github.wjt.poitrans.parser.DefaultParserDelegate;
 import com.github.wjt.poitrans.parser.SQLInfo;
 import com.github.wjt.poitrans.parser.SQLParser;
+import com.github.wjt.poitrans.parser.SelectSQLParser;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -33,7 +35,7 @@ public class ExcelStatement implements Statement {
 
     private Integer columnNumber;
 
-    private SQLParser sqlParser; // init by single-instance
+    private SQLParser sqlParser = DefaultParserDelegate.getParser(); // init by single-instance
 
     public ExcelStatement(SQLHolder sqlHolder, Connection connection) {
         this.sqlHolder = sqlHolder;
@@ -51,6 +53,9 @@ public class ExcelStatement implements Statement {
     }
 
     public SQLInfo getSqlInfo() {
+        if (Objects.isNull(sqlInfo)) {
+            sqlInfo = sqlParser.parse(sqlHolder);
+        }
         return sqlInfo;
     }
 
@@ -78,7 +83,7 @@ public class ExcelStatement implements Statement {
 
     public Workbook getWorkbook() throws IOException {
         if (Objects.isNull(workbook)) {
-            workbook = new XSSFWorkbook(getConnection().getInputStream());
+            workbook = new HSSFWorkbook(getConnection().getInputStream());
         }
         return workbook;
     }

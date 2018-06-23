@@ -1,6 +1,10 @@
 package com.github.wjt.poitrans.parser;
 
 
+import com.github.wjt.poitrans.SQLHolder;
+
 // parse the sql info for sql String
-public class SQLParser {
+public interface SQLParser {
+
+    BaseSQLInfo parse(SQLHolder sqlHolder);
 }

@@ -38,11 +38,17 @@ public class ExcelConnection implements Connection {
         return false;
     }
 
+    @Override
     public InputStream getInputStream() throws FileNotFoundException {
         if (Objects.isNull(inputStream)) {
             inputStream = new FileInputStream(LOCATION + fileName);
         }
         return inputStream;
+    }
+
+    @Override
+    public String getFileName() {
+        return fileName;
     }
 
     public static void main(String[] args) {

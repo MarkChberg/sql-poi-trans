@@ -13,4 +13,6 @@ public interface Connection {
     boolean isClosed();
 
     InputStream getInputStream() throws FileNotFoundException;
+
+    String getFileName();
 }

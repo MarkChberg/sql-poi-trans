@@ -40,9 +40,11 @@ public class ExcelStatement implements Statement {
 
     public ExcelStatement(SQLHolder sqlHolder, Connection connection) {
         this.sqlHolder = sqlHolder;
-        if (Objects.isNull(connection))
+        if (Objects.isNull(connection)) {
             this.connection = new ExcelConnection();
-        this.connection = connection;
+        } else {
+            this.connection = connection;
+        }
     }
 
     public SQLHolder getSqlHolder() {

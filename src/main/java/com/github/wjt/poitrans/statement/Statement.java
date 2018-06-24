@@ -1,10 +1,12 @@
 package com.github.wjt.poitrans.statement;
 
 import java.io.IOException;
+import java.util.Set;
 
 public interface Statement {
 
-    ResultMap<String, String> execute() throws IOException;
+    Set<ResultMap<String, String>> queryExecute() throws IOException;
 
-    ResultMap<String, String> execute(String sql);
+    Boolean execute() throws IOException;
+
 }

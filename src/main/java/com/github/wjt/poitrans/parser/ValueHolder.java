@@ -10,4 +10,20 @@ public class ValueHolder<T> {
         this.value = value;
         this.type = type;
     }
+
+    public T getValue() {
+        return value;
+    }
+
+    public void setValue(T value) {
+        this.value = value;
+    }
+
+    public Class getType() {
+        return type;
+    }
+
+    public void setType(Class type) {
+        this.type = type;
+    }
 }

@@ -2,6 +2,7 @@ package com.github.wjt.poitrans;
 
 import com.github.wjt.poitrans.connection.Connection;
 import com.github.wjt.poitrans.connection.ExcelConnection;
+import com.github.wjt.poitrans.parser.DefaultParserDelegate;
 import com.github.wjt.poitrans.parser.SQLParser;
 import com.github.wjt.poitrans.statement.ExcelStatement;
 import com.github.wjt.poitrans.statement.ResultMap;
@@ -16,7 +17,7 @@ public class ExcelCrawler implements Runnable{
 
     private Statement statement;
 
-    private SQLParser sqlParser;
+    private SQLParser sqlParser = DefaultParserDelegate.getParser();
 
     // private BeanMapping beanMapping;
 
@@ -47,13 +48,13 @@ public class ExcelCrawler implements Runnable{
     }
 
     public static void main(String[] args) {
-        ExcelCrawler.build().statement(new SQLHolder("select * from hello-world.xls")).run();
+        ExcelCrawler.build().statement(new SQLHolder("select * from Sheet1")).run();
     }
 
     @Override
     public void run() {
         try {
-            ResultMap<String, String> execute = statement.execute();
+            statement.execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
